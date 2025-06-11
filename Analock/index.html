@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SmartWatch - Analog + Digital</title>
+<meta name="theme-color" content="#000000" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icon.png" />
+<link rel="apple-touch-icon" href="icon.png" />
+
+</head>
+<body>
+
+<div id="watch" class="mode-off">
+    <div id="screen">
+        <!-- Analog display -->
+        <div class="analog" id="analog">
+            <div class="hand hour"   id="hHand"></div>
+            <div class="hand minute" id="mHand"></div>
+            <div class="hand second" id="sHand"></div>
+            <div class="center-dot"></div>
+
+            <!-- numbers -->
+            <span class="number n1">1</span>  <span class="number n2">2</span>
+            <span class="number n3">3</span>  <span class="number n4">4</span>
+            <span class="number n5">5</span>  <span class="number n6">6</span>
+            <span class="number n7">7</span>  <span class="number n8">8</span>
+            <span class="number n9">9</span>  <span class="number n10">10</span>
+            <span class="number n11">11</span><span class="number n12">12</span>
+        </div>
+
+        <!-- Digital display -->
+        <div class="digital" id="digital">00:00:00</div>
+    </div>
+</div>
+<script src="script.js"></script>
+<!-- <script>
+/* ---------- MODE TOGGLE ---------- */
+// const watch  = document.getElementById("watch");
+// const modes  = ["mode-off","mode-analog","mode-digital"];
+// let modeIdx  = 0;
+// watch.addEventListener("click", ()=>{
+//   modeIdx = (modeIdx + 1) % modes.length;
+//   watch.className = modes[modeIdx];
+// });
+
+/* ---------- TIME UPDATE ---------- */
+const hHand = document.getElementById("hHand");
+const mHand = document.getElementById("mHand");
+const sHand = document.getElementById("sHand");
+const digital = document.getElementById("digital");
+
+function tick(){
+  const now = new Date();
+  const sec = now.getSeconds();
+  const min = now.getMinutes();
+  const hr  = now.getHours() % 12;
+
+  const secDeg = sec * 6;                    // 360/60
+  const minDeg = min * 6 + sec * 0.1;        // smooth minute
+  const hrDeg  = hr * 30 + min * 0.5;        // 360/12 + progress
+
+  sHand.style.transform = `rotate(${secDeg}deg)`;
+  mHand.style.transform = `rotate(${minDeg}deg)`;
+  hHand.style.transform = `rotate(${hrDeg}deg)`;
+
+  digital.textContent = now.toLocaleTimeString("en-GB"); // HH:MM:SS
+}
+
+setInterval(tick, 1000);
+tick(); // initial
+</script> -->
+</body>
+</html>
